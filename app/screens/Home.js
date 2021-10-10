@@ -46,6 +46,29 @@ const Home = () => {
     },
   ]);
 
+  const [friendList, setFriendList] = React.useState([
+    {
+      id: 0,
+      img: images.profile1,
+    },
+    {
+      id: 1,
+      img: images.profile2,
+    },
+    {
+      id: 2,
+      img: images.profile3,
+    },
+    {
+      id: 3,
+      img: images.profile4,
+    },
+    {
+      id: 4,
+      img: images.profile5,
+    },
+  ]);
+
   const _renderItem = (item, index) => {
     return (
       <View
@@ -96,6 +119,60 @@ const Home = () => {
       </View>
     );
   };
+
+  function _renderFriends() {
+    if (friendList.length === 0) {
+      return <View></View>;
+    } else if (friendList.length <= 3) {
+      return friendList.map((item, idx) => (
+        <View key={`friends-${idx}`} style={idx === 0 ? {} : {marginLeft: -20}}>
+          <Image
+            source={item.img}
+            resizeMode="cover"
+            style={{
+              width: 50,
+              height: 50,
+              borderRadius: 25,
+              borderWidth: 3,
+              borderColor: COLORS.primary,
+            }}
+          />
+        </View>
+      ));
+    } else {
+      return (
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          {friendList.map((item, idx) => {
+            if (idx <= 2) {
+              return (
+                <View
+                  key={`friend-${idx}`}
+                  style={idx == 0 ? {} : {marginLeft: -20}}>
+                  <Image
+                    source={item.img}
+                    resizeMode="cover"
+                    style={{
+                      width: 50,
+                      height: 50,
+                      borderRadius: 25,
+                      borderWidth: 3,
+                      borderColor: COLORS.primary,
+                    }}
+                  />
+                </View>
+              );
+            }
+          })}
+          <Text
+            style={{
+              marginLeft: 5,
+              color: COLORS.secondary,
+              ...FONTS.body4,
+            }}>{`+${friendList.length - 3} more`}</Text>
+        </View>
+      );
+    }
+  }
   return (
     <View style={styles.container}>
       {/* New plants */}
@@ -199,7 +276,60 @@ const Home = () => {
       </View>
 
       {/* Added Friend */}
-      <View style={styles.containerAddedFriend}></View>
+      <View style={styles.containerAddedFriend}>
+        <View style={{flex: 1, backgroundColor: COLORS.lightGray}}>
+          <View
+            style={{marginTop: SIZES.radius, marginHorizontal: SIZES.padding}}>
+            <Text style={{color: COLORS.secondary, ...FONTS.h2}}>
+              Added Friends
+            </Text>
+            <Text style={{color: COLORS.secondary, ...FONTS.body3}}>
+              {friendList.length} Total
+            </Text>
+            <View style={{flexDirection: 'row', height: '60%'}}>
+              {/* Friends */}
+              <View
+                style={{
+                  flex: 1.3,
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                }}>
+                {_renderFriends()}
+              </View>
+
+              {/* Add friends */}
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+                }}>
+                <Text style={{color: COLORS.gray, ...FONTS.body3}}>
+                  Add New
+                </Text>
+                <TouchableOpacity
+                  onPress={() => console.log('Hey je suis clique')}
+                  style={{
+                    marginLeft: SIZES.base,
+                    width: 40,
+                    height: 40,
+                    borderRadius: 10,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: COLORS.gray,
+                  }}>
+                  <Image
+                    source={icons.plus}
+                    resizeMode="contain"
+                    style={{width: 20, height: 20}}
+                  />
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
     </View>
   );
 };
