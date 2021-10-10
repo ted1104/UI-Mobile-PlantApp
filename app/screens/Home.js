@@ -12,7 +12,7 @@ import {theme, icons, images} from '../constants';
 
 const {COLORS, FONTS, SIZES} = theme;
 
-const Home = () => {
+const Home = ({navigation}) => {
   const [newPlants, setNewPlants] = React.useState([
     {
       id: 0,
@@ -242,7 +242,7 @@ const Home = () => {
               <View style={{flex: 1}}>
                 <TouchableOpacity
                   style={{flex: 1}}
-                  onPress={() => console.log('pressed image')}>
+                  onPress={() => navigation.navigate('PlantDetail')}>
                   <Image
                     source={images.plant5}
                     resizeMode="cover"
@@ -251,7 +251,7 @@ const Home = () => {
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={{flex: 1, marginTop: SIZES.font}}
-                  onPress={() => console.log('pressed image')}>
+                  onPress={() => navigation.navigate('PlantDetail')}>
                   <Image
                     source={images.plant6}
                     resizeMode="cover"
@@ -262,7 +262,7 @@ const Home = () => {
               <View style={{flex: 1.3}}>
                 <TouchableOpacity
                   style={{flex: 1, marginLeft: SIZES.font}}
-                  onPress={() => console.log('On pressed')}>
+                  onPress={() => navigation.navigate('PlantDetail')}>
                   <Image
                     source={images.plant7}
                     resizeMode="cover"
