@@ -173,6 +173,7 @@ const Home = ({navigation}) => {
       );
     }
   }
+
   return (
     <View style={styles.container}>
       {/* New plants */}
